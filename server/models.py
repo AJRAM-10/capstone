@@ -23,7 +23,6 @@ class Cigar(db.Model, SerializerMixin):
     binder = db.Column(db.String)
     filler = db.Column(db.String)
     owner_review = db.Column(db.String)
-    price = db.Column(db.String)
 
     bundles = db.relationship('Bundle', backref='cigar')
 
@@ -62,9 +61,20 @@ class User(db.Model, SerializerMixin):
 
     subs = db.relationship('Subscription', backref='user')
 
-    @validates('first_name')
-    def validate_first(self, key , first_name):
-        if len(first_name) > 3:
-            return first_name
-        else:
-            raise ValueError('Name is too short')
+    # @validates('first_name')
+    # def validate_first(self, key , first_name):
+    #     if len(first_name) >= 1:
+    #         return first_name
+    #     else:
+    #         raise ValueError('First Name is too short')
+        
+    # @validates('last_name')
+    # def validate_last(self, key, last_name):
+    #     if len(last_name) >= 1:
+    #         return last_name
+    #     else:
+    #         raise ValueError('Last Name is too short')
+        
+    # @validates('email')
+    # def validate_email(self, key, email):
+    #     if 
