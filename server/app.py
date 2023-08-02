@@ -1,4 +1,4 @@
-from models import db, Bundle, Subscription, User
+from models import db, Bundle, Subscription, User, Cigar
 from flask_migrate import Migrate
 from flask import Flask, request, make_response
 from flask_restful import Api, Resource
@@ -24,6 +24,54 @@ api = Api(app)
 def home():
     return ''
 
+class Cigars(Resource):
+    def get(self):
+        cigs = Cigar.query.all()
+
+        response = make_response(cigs.to_dict(), 200)
+
+        return response
+    
+api.add_resource(Cigars, '/cigars')
+
+class CigarsById(Resource):
+    def get(self, id):
+        cigar = Cigar.query.filter(Cigar.id == id).first()
+
+        if cigar:
+            response = make_response(cigar.to_dict(), 200)
+
+        else:
+            response = make_response({"error": "Cigar not found"}, 404)
+
+        return response
+    
+api.add_resource(CigarsById, '/cigars/<int:id>')
+
+class Bundles(Resource):
+    def get(self):
+        bundles = Bundle.query.all()
+        response = make_response(bundles.to_dict(), 200)
+
+        return response
+
+api.add_resource(Bundles, '/bundles')
+
+class BundlesById(Resource):
+    def get(self, id):
+        bundle = Bundle.query.filter(Bundle.id == id).first()
+
+        if bundle:
+            response = make_response(bundle.to_dict(), 200)
+
+        else:
+            response = make_response({"error": "Bundle not found"}, 404)
+
+        return response
+    
+    def patch(self, id):
+        bundle = Bundle.query.filter(Bundle.id == id).first()
+        
 class SubcriptionsById(Resource):
     def patch(self):
         sub = Subscription.query.filter(Subscription.id == id).first()
