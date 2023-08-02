@@ -8,17 +8,18 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>
+          <Routes>
+            <Route path = '/'></Route>
+            <Route path = '/Shop'></Route>
+            <Route path = '/Shop/Cigars'></Route>
+            <Route path = '/Shop/Bundles'></Route>
+            <Route path = '/Shop/Accessories'></Route>
+            <Route path = '/Shop/Merch'></Route>
+            <Route path = '/About'></Route>
+            <Route path = '/Contact'></Route>
+          </Routes>
+        </div>
       </header>
     </div>
   );
