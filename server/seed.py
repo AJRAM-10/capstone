@@ -1,3 +1,5 @@
-from random import choice as rc, randrange
 from app import app
-from models import db
+from models import db, User, Cigar, Bundle, Subscription
+from faker import Faker
+
+fake = Faker()

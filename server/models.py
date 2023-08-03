@@ -1,8 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from sqlalchemy.orm import validates
-from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy_serializer import SerializerMixin
+from sqlalchemy.ext.hybrid import hybrid_property
+from config import db, bcrypt
+
 from datetime import datetime
 
 metadata = MetaData(naming_convention={
@@ -57,24 +59,40 @@ class User(db.Model, SerializerMixin):
     email = db.Column(db.String)
     dob = db.Column(db.String)
     phone_number = db.Column(db.String)
-    password = db.Column(db.String)
+    _password_hash = db.Column(db.String)
 
     subs = db.relationship('Subscription', backref='user')
 
-    # @validates('first_name')
-    # def validate_first(self, key , first_name):
-    #     if len(first_name) >= 1:
-    #         return first_name
-    #     else:
-    #         raise ValueError('First Name is too short')
+    @validates('first_name')
+    def validate_first(self, key , first_name):
+        if not len(first_name) >= 2:
+            raise ValueError('First Name is too short')
+        else:
+            return first_name
         
-    # @validates('last_name')
-    # def validate_last(self, key, last_name):
-    #     if len(last_name) >= 1:
-    #         return last_name
-    #     else:
-    #         raise ValueError('Last Name is too short')
+    @validates('last_name')
+    def validate_first(self, key , last_name):
+        if not len(last_name) >= 2:
+            raise ValueError('First Name is too short')
+        else:
+            return last_name
         
-    # @validates('email')
-    # def validate_email(self, key, email):
-    #     if 
+    @validates('email')
+    def validate_email(self, key, email):
+        ...
+    
+
+    @hybrid_property
+    def password_hash(self):
+        raise Exception("Hashed password is invisible!")
+
+    
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(password.encode('utf-8'))
+        self._password_hash = password_hash.decode('utf-8')
+    
+
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
+    
