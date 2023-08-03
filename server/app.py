@@ -48,6 +48,8 @@ class CigarsById(Resource):
     
 api.add_resource(CigarsById, '/cigars/<int:id>')
 
+
+
 class Bundles(Resource):
     def get(self):
         bundles = Bundle.query.all()
@@ -71,32 +73,50 @@ class BundlesById(Resource):
     
     def patch(self, id):
         bundle = Bundle.query.filter(Bundle.id == id).first()
-        
+
+
+api.add_resource(BundlesById, '/bundles/<int:id>')
+
+
+
 class SubcriptionsById(Resource):
     def patch(self):
         sub = Subscription.query.filter(Subscription.id == id).first()
         data = request.get_json()
 
-        try:
-            if sub:
+        if sub:
+            for key in data:
+                setattr(sub, key, data[key])
 
-                for key in data:
-                    setattr(sub, key, data[key])
+            db.session.add(sub)
+            db.session.commit()
 
-                db.session.add(sub)
-                db.session.commit()
+            response = make_response(sub.to_dict(), 202)
 
-                response = make_response(sub.to_dict(), 202)
-
-        except:
-
+        else:
             response = make_response(
-                {"errors": {"valadation error"}}, 400
+                {"errors": "Could not find subscription"}, 400
             )
         
         return response
     
 api.add_resource(SubcriptionsById, '/subscriptions/<int:id>')
+
+
+
+class UserById(Resource):
+    def get(self, id):
+        user = User.query.filter(User.id == id).first()
+        
+        if user:
+            response = make_response(user.to_dict(), 200)
+        
+        else:
+            response = make_response({"error":"User not found"}, 404)
+
+        return response
+    
+api.add_resource(UserById, '/users/<int:id>')
 
 
 
