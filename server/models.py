@@ -79,7 +79,9 @@ class User(db.Model, SerializerMixin):
         
     @validates('email')
     def validate_email(self, key, email):
-        ...
+        if '@' not in email:
+            raise ValueError("Failed simple email validation")
+        return email
     
 
     @hybrid_property
