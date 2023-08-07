@@ -20,7 +20,7 @@ class Cigar(db.Model, SerializerMixin):
     size = db.Column(db.String)
     strength = db.Column(db.String)
     flavor = db.Column(db.String)
-    cig_pic = db.Column(db.string)
+    cig_pic = db.Column(db.String)
 
     bundles = db.relationship('Bundle', backref='cigar')
 
@@ -30,11 +30,11 @@ class Bundle(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    price = db.Column(db.Float)
+    price = db.Column(db.String)
 
-    cigar_1 = db.Column(db.Integer, db.ForeignKey('cigars.id'))
-    cigar_2 = db.Column(db.Integer, db.ForeignKey('cigars.id'))
-    cigar_3 = db.Column(db.Integer, db.ForeignKey('cigars.id'))
+    cigars = db.Column(db.Integer, db.ForeignKey('cigars.id'))
+    # cigar_2 = db.Column(db.Integer, db.ForeignKey('cigars.id'))
+    # cigar_3 = db.Column(db.Integer, db.ForeignKey('cigars.id'))
 
     subs = db.relationship('Subscription', backref='bundle')
 

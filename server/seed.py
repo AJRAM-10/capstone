@@ -101,25 +101,19 @@ if __name__ == '__main__':
         bundles = [
             Bundle(
                 name = "AJ Fernandez Selections",
-                price = "29.99",
-                cigar_1 = 1,
-                cigar_2 = 2,
-                cigar_3 = 3
+                price = "39.99",
+                cigars = 1
             ),
             Bundle(
                 name = "Arturo Fuente Selections",
                 price = "49.99",
-                cigar_1 = 4,
-                cigar_2 = 5,
-                cigar_3 = 6
+                cigars = 4
             ),
             Bundle(
                 name = "Editor's Picks",
                 price = "29.99",
-                cigar_1 = 7,
-                cigar_2 = 8,
-                cigar_3 = 9
-            ),
+                cigars = 6
+            )
         ]
 
         db.session.add_all(bundles)

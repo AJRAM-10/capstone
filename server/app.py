@@ -123,7 +123,7 @@ class SubcriptionsById(Resource):
         return response
     
     def delete(self, id):
-        sub = Subscription.query.filter(Subcription.id == id).first()
+        sub = Subscription.query.filter(Subscription.id == id).first()
 
         if sub:
 
