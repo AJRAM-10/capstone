@@ -1,6 +1,6 @@
 from models import db, Bundle, Subscription, User, Cigar
 from flask_migrate import Migrate
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, session
 from flask_restful import Api, Resource
 import os
 
@@ -73,14 +73,38 @@ class BundlesById(Resource):
     
     def patch(self, id):
         bundle = Bundle.query.filter(Bundle.id == id).first()
+        data = request.get_json()
 
+        if bundle:
+            for key in data:
+                setattr(bundle, key, data[key])
+
+                db.session.add(bundle)
+                db.session.commit()
+
+                response = make_response(bundle.to_dict(), 202)
+        
+        else:
+            response = make_response({"errors": "Could not find bundle"}, 40)
+
+        return response
 
 api.add_resource(BundlesById, '/bundles/<int:id>')
 
 
 
+class Subscriptions(Resource):
+    def get(self):
+        subs = Subscription.query.all()
+        response = make_response(subs.to_dict(), 200)
+
+        return response
+    
+api.add_resource(Subscriptions, '/subscriptions')
+
+
 class SubcriptionsById(Resource):
-    def patch(self):
+    def patch(self, id):
         sub = Subscription.query.filter(Subscription.id == id).first()
         data = request.get_json()
 
@@ -94,14 +118,51 @@ class SubcriptionsById(Resource):
             response = make_response(sub.to_dict(), 202)
 
         else:
-            response = make_response(
-                {"errors": "Could not find subscription"}, 400
-            )
+            response = make_response({"errors": "Could not find subscription"}, 400)
         
         return response
     
+    def delete(self, id):
+        sub = Subscription.query.filter(Subcription.id == id).first()
+
+        if sub:
+
+            db.session.delete(sub)
+            db.session.commit()
+
+            response = make_response({}, 204)
+
+        else:
+            response = make_response({"error":"Subscription not found"}, 404)
+    
 api.add_resource(SubcriptionsById, '/subscriptions/<int:id>')
 
+
+
+class Users(Resource):
+    def post(self):
+
+        data = request.get_json()
+
+        try:
+            new_user = User(
+                first_name = data['firstName'],
+                last_name = data['lastName'],
+                email = data['data'],
+                _password_hash = data['password']
+            )
+
+            db.session.add(new_user)
+            db.session.commit()
+
+            response = make_response(new_user.to_dict(), 201)
+
+        except ValueError:
+            response = make_response({"erros":["validation errors"]}, 400)
+
+        return response
+
+api.add_resource(Users, '/users')
 
 
 class UserById(Resource):
@@ -116,6 +177,24 @@ class UserById(Resource):
 
         return response
     
+    def patch(self, id):
+        user = User.query.filter(User.id == id).first()
+        data = request.get_json()
+
+        if user:
+            for key in data:
+                setattr(user, key, data[key])
+
+            db.session.add(user)
+            db.session.commit()
+
+            response = make_response(user.to_dict(), 202)
+
+        else:
+            response = make_response({"errors": "Could not find user"}, 400)
+        
+        return response
+    
 api.add_resource(UserById, '/users/<int:id>')
 
 
@@ -125,9 +204,7 @@ class Login(Resource):
         ...
 
     def post(self):
-        user = User.query.filter(
-            User.username == request.get_json()['username']
-        ).first()
+        user = User.query.filter(User.email == request.get_json()['email']).first()
 
         session['user_id'] = user.id
         return user.to_dict()

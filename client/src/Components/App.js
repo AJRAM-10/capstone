@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 
@@ -11,13 +11,15 @@ function App() {
         <div>
           <Routes>
             <Route path = '/'></Route>
-            <Route path = '/Shop'></Route>
-            <Route path = '/Shop/Cigars'></Route>
-            <Route path = '/Shop/Bundles'></Route>
-            <Route path = '/Shop/Accessories'></Route>
-            <Route path = '/Shop/Merch'></Route>
-            <Route path = '/About'></Route>
-            <Route path = '/Contact'></Route>
+            <Route path = '/shop'></Route>
+            <Route path = '/shop/cigars'></Route>
+            <Route path = '/shop/bundles'></Route>
+            <Route path = '/shop/accessories'></Route>
+            <Route path = '/shop/merch'></Route>
+            <Route path = '/about'></Route>
+            <Route path = '/contact'></Route>
+            <Route path = '/account/login'></Route>
+            <Route path = '/account/register'></Route>
           </Routes>
         </div>
       </header>

@@ -1,9 +1,9 @@
 import React from "react";
 
-function ContactForm() {
+function CigarCard() {
     return (
         <div></div>
     )
 }
 
-export default ContactForm
+export default CigarCard
