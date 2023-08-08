@@ -33,6 +33,9 @@ function LoginForm() {
             }
           });
           alert('You are now Logged In');
+
+          e.target.email.value = '';
+          e.target.password.value = '';
     }
 
     function handleLogout() {
