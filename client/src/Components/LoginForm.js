@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useContext } from "react";
+import { Context } from "../App";
 
-function LoginForm(){
-    const [user, setUser] = useState(null);
 
+function LoginForm() {
+    const [user, setUser] = useContext(Context);
+
+    useEffect(() => {
+        fetch("/check_session").then((resp) => {
+            if (resp.ok) {
+              resp.json().then((user) => setUser(user));
+            }
+        })
+    },[])
+    
     console.log(user);
 
     function handleLogin(e) {
@@ -22,7 +32,7 @@ function LoginForm(){
               resp.json().then((user) => setUser(user));
             }
           });
-          alert('You are now Logged In')
+          alert('You are now Logged In');
     }
 
     function handleLogout() {

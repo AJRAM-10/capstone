@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-function NewBundleForm({ customBundle }){
-
-    console.log(customBundle)
+function NewBundleForm({ bundles }){
 
     const [ cigars, setCigars ] = useState("")
-
+    const customBundle = bundles[3]
+    
+    console.log(customBundle)
     const id = customBundle.id
 
     console.log(id)

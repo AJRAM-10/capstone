@@ -2,8 +2,7 @@ import React from "react";
 
 function BundlesCard({ bundle }) {
     return (
-        <div>
-            <li className="card">
+        <li className="card">
             <div>
                 {/* <img src={cigar.cig_pic} alt={cigar.name} className="card-img"/> */}
                 <div className="card-content">
@@ -19,7 +18,6 @@ function BundlesCard({ bundle }) {
                 </div>
             </div>
         </li>
-        </div>
     )
 }
 

@@ -229,9 +229,6 @@ api.add_resource(UserById, '/users/<int:id>')
 
 class Login(Resource):
 
-    def get(self):
-        ...
-
     def post(self):
         user = User.query.filter(User.email == request.get_json()['email']).first()
 
