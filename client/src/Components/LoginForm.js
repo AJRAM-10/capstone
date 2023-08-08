@@ -22,6 +22,7 @@ function LoginForm(){
               resp.json().then((user) => setUser(user));
             }
           });
+          alert('You are now Logged In')
     }
 
     function handleLogout() {

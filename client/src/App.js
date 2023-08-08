@@ -7,19 +7,21 @@ import SignUp from './Components/SignUp';
 import User from './Components/User';
 import About from './Components/About';
 import Header from './Components/Header';
+import Cigars from './Components/Cigars';
+import Bundles from './Components/Bundles';
 
 function App() {
 
   const [ user, setUser ] = useState(null)
   
-  useEffect(() => {
-    fetch("/check_session")
-    .then((resp) => { if (resp.ok){ resp.json().then((user) = setUser(user)) }
-    })
-  })
+  // useEffect(() => {
+  //   fetch("/check_session")
+  //   .then((resp) => { if (resp.ok){ resp.json().then((user) = setUser(user)) }
+  //   })
+  // })
 
   console.log(user)
-  
+
   return (
     <div className="App">
       <header className="App-header">
@@ -28,8 +30,8 @@ function App() {
           <Routes>
             <Route path = '/' element={<Home/>}></Route>
             <Route path = '/shop' element={<Shop/>}></Route>
-            <Route path = '/shop/cigars'></Route>
-            <Route path = '/shop/bundles'></Route>
+            <Route path = '/shop/cigars' element={<Cigars/>}></Route>
+            <Route path = '/shop/bundles'element={<Bundles/>}></Route>
             <Route path = '/shop/accessories'></Route>
             <Route path = '/shop/merch'></Route>
             <Route path = '/about' element={<About/>}></Route>

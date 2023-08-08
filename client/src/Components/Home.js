@@ -3,8 +3,8 @@ import React from "react";
 
 function Home(){
     return (
-        <div>
-            
+        <div className="top-bundle">
+            <h1></h1>
         </div>
     )
 }
