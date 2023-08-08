@@ -5,8 +5,6 @@ from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.hybrid import hybrid_property
 from config import db, bcrypt
 
-from datetime import datetime
-
 metadata = MetaData(naming_convention={
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
 })
@@ -19,14 +17,14 @@ class Cigar(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     brand = db.Column(db.String)
-    origin = db.Column(db.String)
+    size = db.Column(db.String)
     strength = db.Column(db.String)
-    wrapper = db.Column(db.String)
-    binder = db.Column(db.String)
-    filler = db.Column(db.String)
-    owner_review = db.Column(db.String)
+    flavor = db.Column(db.String)
+    cig_pic = db.Column(db.String)
 
     bundles = db.relationship('Bundle', backref='cigar')
+
+    serialize_rules = ('-bundles.cigar',)
 
 
 class Bundle(db.Model, SerializerMixin):
@@ -34,21 +32,26 @@ class Bundle(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    price = db.Column(db.Float)
+    price = db.Column(db.String)
 
-    cigar_1 = db.Column(db.Integer, db.ForeignKey('cigar.id'))
-    cigar_2 = db.Column(db.Integer, db.ForeignKey('cigar.id'))
-    cigar_3 = db.Column(db.Integer, db.ForeignKey('cigar.id'))
+    cigars = db.Column(db.Integer, db.ForeignKey('cigars.id'))
+    # cigar_2 = db.Column(db.Integer, db.ForeignKey('cigars.id'))
+    # cigar_3 = db.Column(db.Integer, db.ForeignKey('cigars.id'))
 
     subs = db.relationship('Subscription', backref='bundle')
+
+    serialize_rules = ('-subs.bundle', '-cigar.bundles')
 
 class Subscription(db.Model, SerializerMixin):
     __tablename__ = 'subscriptions'
 
     id = db.Column(db.Integer, primary_key=True)
+    time = db.Column(db.String)
 
-    bundle_id = db.Column(db.Integer, db.ForeignKey('bundle.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    bundle_id = db.Column(db.Integer, db.ForeignKey('bundles.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    serialize_rules = ('-bundle.subs', '-user.subs')
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
@@ -57,11 +60,11 @@ class User(db.Model, SerializerMixin):
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     email = db.Column(db.String)
-    dob = db.Column(db.String)
-    phone_number = db.Column(db.String)
     _password_hash = db.Column(db.String)
 
     subs = db.relationship('Subscription', backref='user')
+
+    serialize_rules = ('-subs.user',)
 
     @validates('first_name')
     def validate_first(self, key , first_name):
