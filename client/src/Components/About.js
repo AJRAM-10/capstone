@@ -10,8 +10,10 @@ function About(){
             <h1>About Us</h1>
             <br></br>
             <p className="About Statement">Welcome to Fellowship Cigar Club<br></br>
-            Michael Torres has been a cigar officionado for sometime now. <br></br>
-            This is where all of the origin statements about michael will go!
+            Fellowship Cigars began as a casual conversation between friends over a good cigar. <br></br>
+            Owner Michael Torres began his passion for cigars by simply trying highly-rated cigars across the business. <br></br>
+            After developing his palate and exploring different brands, Fellowship Cigars launched as the culmination of these hours spent.<br></br>
+            Each cigar bundle has been smoked by the staff at Fellowship Cigars and has proven to be some of the best and consistent cigars in the industry. 
             </p>
         
         </div>

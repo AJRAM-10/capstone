@@ -5,15 +5,6 @@ function LoginForm(){
 
     console.log(user);
 
-    function handleCheckSession() {
-        fetch("/check_session")
-        .then((resp) => {
-            if (resp.ok){
-                resp.json().then((user) = setUser(user))
-            }
-        })
-    }
-
     function handleLogin(e) {
         e.preventDefault();
 
@@ -40,9 +31,9 @@ function LoginForm(){
     }
 
     return (
-        <>
+        <div className="login-container">
             <h1>Login</h1>
-            <form onSubmit={handleLogin}>
+            <form className="login-form" onSubmit={handleLogin}>
                 <label>EMAIL</label>
                 <input id="email" type="text" />
                 <label>PASSWORD</label>
@@ -52,11 +43,7 @@ function LoginForm(){
 
             <h1>Logout Form</h1>
             <button onClick = {handleLogout}>Logout</button>
-
-            <br />
-
-            <button onClick = {handleCheckSession}>Check Session</button>
-        </>
+        </div>
     )
 }
 

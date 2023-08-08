@@ -9,6 +9,17 @@ import About from './Components/About';
 import Header from './Components/Header';
 
 function App() {
+
+  const [ user, setUser ] = useState(null)
+  
+  useEffect(() => {
+    fetch("/check_session")
+    .then((resp) => { if (resp.ok){ resp.json().then((user) = setUser(user)) }
+    })
+  })
+
+  console.log(user)
+  
   return (
     <div className="App">
       <header className="App-header">
