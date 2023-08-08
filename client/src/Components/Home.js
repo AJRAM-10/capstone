@@ -1,11 +1,10 @@
 import React from "react";
-import Header from "./Header";
 
 
 function Home(){
     return (
-        <div>
-            
+        <div className="top-bundle">
+            <h1></h1>
         </div>
     )
 }

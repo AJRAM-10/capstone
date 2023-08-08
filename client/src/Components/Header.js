@@ -8,7 +8,7 @@ function Header(){
         <header>
             <>
             <Link to="/">
-                <h1 className="header">Fellowship Cigar Club</h1>
+                <h1 className="header">Fellowship Cigars</h1>
             </Link>
             <NavBar/>
             </>

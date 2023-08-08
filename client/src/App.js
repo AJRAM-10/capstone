@@ -7,29 +7,38 @@ import SignUp from './Components/SignUp';
 import User from './Components/User';
 import About from './Components/About';
 import Header from './Components/Header';
+import Cigars from './Components/Cigars';
+import Bundles from './Components/Bundles';
+
+export const Context = React.createContext();
 
 function App() {
+
+  const [ user, setUser ] = useState(null)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <Header/>
-        <div>
-          <Routes>
-            <Route path = '/' element={<Home/>}></Route>
-            <Route path = '/shop' element={<Shop/>}></Route>
-            <Route path = '/shop/cigars'></Route>
-            <Route path = '/shop/bundles'></Route>
-            <Route path = '/shop/accessories'></Route>
-            <Route path = '/shop/merch'></Route>
-            <Route path = '/about' element={<About/>}></Route>
-            <Route path = '/contact'></Route>
-            <Route path = '/account' element={<User/>}></Route>
-            <Route path = '/account/login' element={<Login/>}></Route>
-            <Route path = '/account/register' element={<SignUp/>}></Route>
-          </Routes>
-        </div>
-      </header>
-    </div>
+    <Context.Provider value={[ user, setUser ]}>
+      <div className="App">
+        <header className="App-header">
+          <Header/>
+          <div>
+            <Routes>
+              <Route path = '/' element={<Home/>}></Route>
+              <Route path = '/shop' element={<Shop/>}></Route>
+              <Route path = '/shop/cigars' element={<Cigars/>}></Route>
+              <Route path = '/shop/bundles'element={<Bundles/>}></Route>
+              <Route path = '/shop/accessories'></Route>
+              <Route path = '/shop/merch'></Route>
+              <Route path = '/about' element={<About/>}></Route>
+              <Route path = '/contact'></Route>
+              <Route path = '/account' element={<User/>}></Route>
+              <Route path = '/account/login' element={<Login/>}></Route>
+              <Route path = '/account/register' element={<SignUp/>}></Route>
+            </Routes>
+          </div>
+        </header>
+      </div>
+    </Context.Provider>
   );
 }
 

@@ -32,7 +32,15 @@ function NewUserForm(){
             body: JSON.stringify(newUser)
         })
             .then(resp => resp.json())
-            .then(newUser = setUsers([...users, newUser]))
+            .then(newUser = setUsers([...users, newUser])
+        )
+
+        alert('Welcome To Fellowship Cigars');
+
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPassword("");
     }
 
 
@@ -41,13 +49,13 @@ function NewUserForm(){
             <h1>CREATE ACCOUNT</h1>
             <form id="register" onSubmit={handleSubmit}>
                 <label for="firstName">FIRST NAME</label>
-                <input type='text' name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
+                <input type='text' id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
                 <label for="lastName">LAST NAME</label>
-                <input type='text' name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)}></input>
+                <input type='text' id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)}></input>
                 <label for="email">EMAIL</label>
-                <input type='text' name="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                <input type='text' id="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
                 <label for="password">PASSWORD</label>
-                <input type='text' name="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
+                <input type='text' id="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
                 <button type="submit">Submit</button>
             </form>
         </div>

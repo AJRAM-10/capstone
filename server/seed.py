@@ -113,6 +113,11 @@ if __name__ == '__main__':
                 name = "Editor's Picks",
                 price = "29.99",
                 cigars = 6
+            ),
+            Bundle(
+                name = "Custom Bundle",
+                price = "39.99",
+                cigars = 8
             )
         ]
 
