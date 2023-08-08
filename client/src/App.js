@@ -6,12 +6,13 @@ import Login from './Components/Login';
 import SignUp from './Components/SignUp';
 import User from './Components/User';
 import About from './Components/About';
+import Header from './Components/Header';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
+        <Header/>
         <div>
           <Routes>
             <Route path = '/' element={<Home/>}></Route>
