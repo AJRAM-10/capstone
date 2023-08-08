@@ -9,4 +9,4 @@ function Cigars(){
     )
 }
 
-export default CigarCard
+export default Cigars

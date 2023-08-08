@@ -24,6 +24,8 @@ class Cigar(db.Model, SerializerMixin):
 
     bundles = db.relationship('Bundle', backref='cigar')
 
+    serialize_rules = ('-bundles.cigar',)
+
 
 class Bundle(db.Model, SerializerMixin):
     __tablename__ = 'bundles'
@@ -38,6 +40,8 @@ class Bundle(db.Model, SerializerMixin):
 
     subs = db.relationship('Subscription', backref='bundle')
 
+    serialize_rules = ('-subs.bundle', '-cigar.bundles')
+
 class Subscription(db.Model, SerializerMixin):
     __tablename__ = 'subscriptions'
 
@@ -46,6 +50,8 @@ class Subscription(db.Model, SerializerMixin):
 
     bundle_id = db.Column(db.Integer, db.ForeignKey('bundles.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    serialize_rules = ('-bundle.subs', '-user.subs')
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
@@ -57,6 +63,8 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String)
 
     subs = db.relationship('Subscription', backref='user')
+
+    serialize_rules = ('-subs.user',)
 
     @validates('first_name')
     def validate_first(self, key , first_name):

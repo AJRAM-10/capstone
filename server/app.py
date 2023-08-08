@@ -1,6 +1,6 @@
 from models import db, Bundle, Subscription, User, Cigar
 from flask_migrate import Migrate
-from flask import Flask, request, make_response, session
+from flask import Flask, request, make_response, session, jsonify
 from flask_restful import Api, Resource
 import os
 
@@ -14,6 +14,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 
+app.secret_key = "Chingasos91" # signature for Flask session
+
 migrate = Migrate(app, db)
 
 db.init_app(app)
@@ -26,9 +28,10 @@ def home():
 
 class Cigars(Resource):
     def get(self):
-        cigs = Cigar.query.all()
+        cigars = Cigar.query.all()
+        cigars_to_dict = [cigar.to_dict() for cigar in cigars]
 
-        response = make_response(cigs.to_dict(), 200)
+        response = make_response(cigars_to_dict, 200)
 
         return response
     
@@ -53,7 +56,9 @@ api.add_resource(CigarsById, '/cigars/<int:id>')
 class Bundles(Resource):
     def get(self):
         bundles = Bundle.query.all()
-        response = make_response(bundles.to_dict(), 200)
+        bundles_to_dict = [bundle.to_dict() for bundle in bundles]
+
+        response = make_response(bundles_to_dict, 200)
 
         return response
 
@@ -96,7 +101,24 @@ api.add_resource(BundlesById, '/bundles/<int:id>')
 class Subscriptions(Resource):
     def get(self):
         subs = Subscription.query.all()
-        response = make_response(subs.to_dict(), 200)
+        subs_to_dict = [sub.to_dict() for sub in subs]
+        response = make_response(subs_to_dict, 200)
+
+        return response
+    
+    def post(self):
+        data = request.get_json()
+
+        new_sub = Subscription(
+            time = data['time'],
+            bundle_id = data['bundle_id'],
+            user_id = data['user_id'],
+        )
+
+        db.session.add(new_sub)
+        db.session.commit()
+        
+        response = make_response(new_sub.to_dict(), 201)
 
         return response
     
@@ -140,6 +162,13 @@ api.add_resource(SubcriptionsById, '/subscriptions/<int:id>')
 
 
 class Users(Resource):
+    def get(self):
+        users = User.query.all()
+        users_to_dict = [user.to_dict() for user in users]
+        response = make_response(users_to_dict, 200)
+
+        return response
+    
     def post(self):
 
         data = request.get_json()
@@ -148,7 +177,7 @@ class Users(Resource):
             new_user = User(
                 first_name = data['firstName'],
                 last_name = data['lastName'],
-                email = data['data'],
+                email = data['email'],
                 _password_hash = data['password']
             )
 
@@ -206,8 +235,17 @@ class Login(Resource):
     def post(self):
         user = User.query.filter(User.email == request.get_json()['email']).first()
 
-        session['user_id'] = user.id
-        return user.to_dict()
+        print(user.first_name)
+
+        if user:
+            session['user_id'] = user.id
+
+            response = make_response(user.to_dict(), 201)
+
+        else:
+            response = make_response({{"errors": "incorrect login"}}, 404)
+        
+        return response
 
 api.add_resource(Login, '/login')
 
@@ -217,8 +255,12 @@ class Logout(Resource):
 
     def delete(self): # just add this line!
         session['user_id'] = None
-        return {'message': '204: No Content'}, 204
 
+        response = make_response({},204)
+
+        return response
+
+        
 api.add_resource(Logout, '/logout')
 
 
@@ -228,9 +270,12 @@ class CheckSession(Resource):
     def get(self):
         user = User.query.filter(User.id == session.get('user_id')).first()
         if user:
-            return user.to_dict()
+            response = make_response(user.to_dict(), 200)
+
         else:
-            return {'message': '401: Not Authorized'}, 401
+            response = make_response({}, 401)
+
+        return response
 
 api.add_resource(CheckSession, '/check_session')
 

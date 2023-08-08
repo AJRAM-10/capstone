@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function NewUserForm(){
     const [ users, setUsers ] = useState("")
@@ -16,7 +16,7 @@ function NewUserForm(){
     function handleSubmit(e) {
         e.preventDefault()
 
-        const newUser = {
+        let newUser = {
             firstName: firstName,
             lastName: lastName,
             email: email,
@@ -48,6 +48,7 @@ function NewUserForm(){
                 <input type='text' name="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
                 <label for="password">PASSWORD</label>
                 <input type='text' name="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
+                <button type="submit">Submit</button>
             </form>
         </div>
     )
