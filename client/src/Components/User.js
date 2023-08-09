@@ -14,15 +14,8 @@ function User() {
     },[])
 
     return (
-        <>This is where all the user info will be</>
+        <>{user ? <UserCard user={user}/>:"No User Found! Login "}</>
     )  
 }
 
 export default User
-
-
-// return (
-//     <div>
-//         <UserCard/>
-//     </div>
-// )

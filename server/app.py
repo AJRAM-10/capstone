@@ -111,8 +111,8 @@ class Subscriptions(Resource):
 
         new_sub = Subscription(
             time = data['time'],
-            bundle_id = data['bundle_id'],
-            user_id = data['user_id'],
+            bundle_id = data['bundle'],
+            user_id = data['user'],
         )
 
         db.session.add(new_sub)
@@ -212,7 +212,7 @@ class UserById(Resource):
 
         if user:
             for key in data:
-                setattr(user, key, data[key])
+                setattr(user, 'subs', data[key])
 
             db.session.add(user)
             db.session.commit()
