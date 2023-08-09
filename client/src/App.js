@@ -22,8 +22,9 @@ function App() {
       <div className="App">
         <header className="header-root">
           <Header/>
-          <div>
-            <Routes>
+        </header>
+        <body>
+        <Routes>
               <Route path = '/' element={<Home/>}></Route>
               <Route path = '/shop' element={<Shop/>}></Route>
               <Route path = '/shop/cigars' element={<Cigars/>}></Route>
@@ -35,9 +36,8 @@ function App() {
               <Route path = '/account' element={<User/>}></Route>
               <Route path = '/account/login' element={<Login/>}></Route>
               <Route path = '/account/register' element={<SignUp/>}></Route>
-            </Routes>
-          </div>
-        </header>
+          </Routes>
+        </body>
       </div>
     </Context.Provider>
   );

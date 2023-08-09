@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 
 function Carousel({ images }){
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(null);
-  
+
     const slideVariants = {
       hiddenRight: {
         x: "100%",
@@ -74,6 +75,15 @@ function Carousel({ images }){
     return (
       <div className="carousel">
           <div className="carousel-images">
+            <div className="carousel-header">
+              <h2>Cigars for every Palate</h2>
+            </div>
+            <div className="subheader">
+              Affordable Bundles
+            </div>
+            <Link to="/shop">
+              <button className="button">SHOP NOW</button>
+            </Link>
           <AnimatePresence>
             <motion.img
               key={currentIndex}
@@ -132,6 +142,6 @@ function Carousel({ images }){
         </div>
       </div>
     );
-}
+};
 
 export default Carousel

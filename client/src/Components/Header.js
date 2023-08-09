@@ -22,7 +22,7 @@ function Header(){
                 </div>
                 <div>
                 <Link to="/account/login">
-                    <h3 className="login-link">LogIn/Logout</h3>
+                    <span className="login-link">LogIn/Logout</span>
                 </Link>
                 </div>
             </div>
