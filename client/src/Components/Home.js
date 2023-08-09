@@ -11,7 +11,6 @@ function Home(){
 
     return (
         <main className="main">
-            <h1>Welcome</h1>
             <Carousel images={images}/>
         </main>
     )

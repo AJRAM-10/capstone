@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import "./App.css";
 import Home from './Components/Home';
 import Shop from './Components/Shop';
 import Login from './Components/Login';
@@ -19,7 +20,7 @@ function App() {
   return (
     <Context.Provider value={[ user, setUser ]}>
       <div className="App">
-        <header className="App-header">
+        <header className="header-root">
           <Header/>
           <div>
             <Routes>
