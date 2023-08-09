@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 function NewUserForm(){
-    const [ users, setUsers ] = useState("")
+    const [ users, setUsers ] = useState([])
     const [ firstName, setFirstName ] = useState("")
     const [ lastName, setLastName ] = useState("")
     const [ email, setEmail ] = useState("")
