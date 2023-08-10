@@ -48,7 +48,7 @@ if __name__ == '__main__':
                 size = "60 Salomon 5.5x60",
                 strength = "Mellow to Medium Body",
                 flavor = "Subtle notes of nuts, and cream.",
-                cig_pic = ""
+                cig_pic = "https://images.squarespace-cdn.com/content/v1/5d3daa4a17aa5f0001719b33/1565154893540-IE9D2A0I9H8HB6YWZPXL/_MG_6065+-+fix.jpg?format=2500w"
             ),
             Cigar(
                 name = "Opus X Lost City",
