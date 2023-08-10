@@ -40,7 +40,7 @@ function NewBundleForm({ bundles }){
     return(
         <div>
             <h1>Custom Bundle</h1>
-            <form id="new-bundle" onSubmit={handleSubmit}>
+            <form className="form" id="new-bundle" onSubmit={handleSubmit}>
                 <label for="cigars">Cigars</label>
                 <select className="select" name="cigars" id="cigars" onChange={handleChange}>
                     <option value="1">New World Cameroon - AJ Fernandez</option>

@@ -11,12 +11,24 @@ function UserCard({user}){
         )
     })
     return(
-        <div className="user-container">
-            <h1 className="name">{user.first_name} {user.last_name}</h1>
-            <h3 className="email">{user.email}</h3>
-            <ul>
+        <div className="user-info">
+            <ul className="card-list">
+                <li className="card">
+                    <div className="card-content">
+                        <div>
+                            <h3 className="name">Name: {user.first_name} {user.last_name}</h3>
+                        </div>
+                        <div>
+                            <h3 className="email">Email: {user.email}</h3>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul className="card-list">
+                <h1>Your Subscriptions</h1>
                 {mySubs}
             </ul>
+
         </div>
     )
 }

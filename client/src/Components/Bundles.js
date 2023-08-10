@@ -26,11 +26,12 @@ function Bundles() {
    
     console.log(pack)
     return (
-        <div>
+        <div className="bundles">
+            <h1>Bundles</h1>
             <ul className="card-list">
                 {pack}
             </ul>
-            <div>
+            <div className="form-container">
                 {bundles.length>0 && <NewBundleForm bundles={bundles}/>}
             </div>
         </div>

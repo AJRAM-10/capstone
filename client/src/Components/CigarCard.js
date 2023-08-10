@@ -13,14 +13,17 @@ function CigarCard({ cigar }) {
                         <h3>{cigar.brand}</h3>
                     </div>
                     <div>
-                        <h3>{cigar.size}</h3>
+                        <span>Size: {cigar.size}</span>
                     </div>
+                    <br></br>
                     <div>
-                        <h3>{cigar.strength}</h3>
+                        <span>Strength: {cigar.strength}</span>
                     </div>
+                    <br></br>
                     <div>
-                        <h3>{cigar.flavor}</h3>
+                        <span>Flavor Profile: {cigar.flavor}</span>
                     </div>
+                    <br></br>
                 </div>
             </div>
         </li>
