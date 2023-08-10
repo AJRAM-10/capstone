@@ -5,13 +5,27 @@ import { Link } from "react-router-dom"
 function Header(){
 
     return(
-        <header>
-            <>
-            <Link to="/">
-                <h1 className="header">Fellowship Cigars</h1>
-            </Link>
-            <NavBar/>
-            </>
+        <header className="header-container">
+            <div className="header-leftside">
+                <NavBar/>
+            </div>
+            <div className="header-center">
+                <Link to="/">
+                    <h1 className="header-logo">Fellowship Cigars</h1>
+                </Link>
+            </div>
+            <div className="header-rightside">
+                <div>
+                <Link to="/account">
+                    <button className="button">Account</button>
+                </Link>
+                </div>
+                <div>
+                <Link to="/account/login">
+                    <span className="login-link">LogIn/Logout</span>
+                </Link>
+                </div>
+            </div>
         </header>
     )
 }

@@ -52,11 +52,11 @@ function LoginForm() {
                 <input id="email" type="text" />
                 <label>PASSWORD</label>
                 <input id="password" type="text"></input>
-                <button type='submit'>LOGIN</button>
+                <button className="button" type='submit'>LOGIN</button>
             </form>
 
-            <h1>Logout Form</h1>
-            <button onClick = {handleLogout}>Logout</button>
+            <h1>Logout</h1>
+            <button className="button" onClick = {handleLogout}>Logout</button>
         </div>
     )
 }
