@@ -47,7 +47,7 @@ function NewUserForm(){
     return(
         <div className="new-user">
             <h1>CREATE ACCOUNT</h1>
-            <div>
+            <div className="form-container">
                 <form className="form" id="register" onSubmit={handleSubmit}>
                     <div>
                         <label for="firstName">FIRST NAME: </label>

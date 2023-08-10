@@ -14,7 +14,12 @@ function User() {
     },[])
 
     return (
-        <>{user ? <UserCard user={user}/>:"No User Found! Login "}</>
+        <div className="account">
+            <h1>Welcome Back {user.first_name}!</h1>
+            <div>
+                {user ? <UserCard user={user}/>:"No User Found! Login "}
+            </div>
+        </div>
     )  
 }
 

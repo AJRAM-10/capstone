@@ -21,9 +21,12 @@ function Cigars(){
 
     console.log(humidor)
     return (
-        <ul className="card-list">
-            {humidor}
-        </ul>
+        <div className="cigars">
+            <h1>Cigars</h1>
+            <ul className="card-list">
+                {humidor}
+            </ul>
+        </div>
     )
 }
 

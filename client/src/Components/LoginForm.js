@@ -45,20 +45,25 @@ function LoginForm() {
     }
 
     return (
-        <div className="login-container">
+        <div className="login">
             <h1>Login</h1>
-            <form className="form" onSubmit={handleLogin}>
-                <label>EMAIL:</label>
-                <input id="email" type="text" />
-                <br></br>
-                <label>PASSWORD:</label>
-                <input id="password" type="text"></input>
-                <br></br>
-                <button className="button" type='submit'>LOGIN</button>
-            </form>
-
+            <div className="form-container">
+                <form className="form" onSubmit={handleLogin}>
+                    <label>EMAIL:</label>
+                    <input id="email" type="text" />
+                    <br></br>
+                    <label>PASSWORD:</label>
+                    <input id="password" type="text"></input>
+                    <br></br>
+                    <button className="button" type='submit'>LOGIN</button>
+                </form>
+            </div>
             <h1>Logout</h1>
-            <button className="button" onClick = {handleLogout}>Logout</button>
+            <div className="form-container">
+              <div className="form">
+                  <button className="button" onClick = {handleLogout}>Logout</button>
+              </div>
+            </div>
         </div>
     )
 }
