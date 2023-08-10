@@ -10,9 +10,9 @@ function Home(){
     ]
 
     return (
-        <main className="main">
+        <div className="main">
             <Carousel images={images}/>
-        </main>
+        </div>
     )
 }
 

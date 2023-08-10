@@ -23,8 +23,8 @@ function App() {
         <header className="header-root">
           <Header/>
         </header>
-        <body>
-        <Routes>
+        <main>
+          <Routes>
               <Route path = '/' element={<Home/>}></Route>
               <Route path = '/shop' element={<Shop/>}></Route>
               <Route path = '/shop/cigars' element={<Cigars/>}></Route>
@@ -37,7 +37,7 @@ function App() {
               <Route path = '/account/login' element={<Login/>}></Route>
               <Route path = '/account/register' element={<SignUp/>}></Route>
           </Routes>
-        </body>
+        </main>
       </div>
     </Context.Provider>
   );
