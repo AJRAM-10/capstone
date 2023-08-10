@@ -47,11 +47,13 @@ function LoginForm() {
     return (
         <div className="login-container">
             <h1>Login</h1>
-            <form className="login-form" onSubmit={handleLogin}>
-                <label>EMAIL</label>
+            <form className="form" onSubmit={handleLogin}>
+                <label>EMAIL:</label>
                 <input id="email" type="text" />
-                <label>PASSWORD</label>
+                <br></br>
+                <label>PASSWORD:</label>
                 <input id="password" type="text"></input>
+                <br></br>
                 <button className="button" type='submit'>LOGIN</button>
             </form>
 
