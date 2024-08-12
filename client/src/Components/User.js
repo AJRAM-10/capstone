@@ -15,9 +15,8 @@ function User() {
 
     return (
         <div className="account">
-            <h1>Welcome Back {user.first_name}!</h1>
             <div>
-                {user ? <UserCard user={user}/>:"No User Found! Login "}
+                {user ? <UserCard user={user}/>:<h1>No User Found! Please Login</h1>}
             </div>
         </div>
     )  

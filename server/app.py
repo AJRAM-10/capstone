@@ -187,7 +187,7 @@ class Users(Resource):
             response = make_response(new_user.to_dict(), 201)
 
         except ValueError:
-            response = make_response({"erros":["validation errors"]}, 400)
+            response = make_response({"error":["validation errors"]}, 400)
 
         return response
 

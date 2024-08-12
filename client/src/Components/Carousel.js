@@ -30,7 +30,7 @@ function Carousel({ images }){
                       <h2>Cigars for every Palate</h2>
                     </div>
                     <div className="subheader">
-                      Affordable Bundles
+                      Custom Bundles Available
                     </div>
                     <Link to="/shop">
                       <button className="button">SHOP NOW</button>
